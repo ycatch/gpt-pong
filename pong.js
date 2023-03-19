@@ -10,9 +10,26 @@ let paddle = { x: canvas.width/2, y: canvas.height-20, width: 80, height: 10 }; 
 let leftPressed = false;  // 左キーが押されているかどうかのフラグ
 let rightPressed = false;  // 右キーが押されているかどうかのフラグ
 
+let intervalId;     //開始・停止・再開のフラグ
+
 // キーイベントのリスナーを追加
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+
+
+// ボタンイベントのリスナーを追加
+document.getElementById("start-button").addEventListener("click", function(){
+    startGame();
+});
+
+document.getElementById("stop-button").addEventListener("click", function(){
+    stopGame();
+});
+
+document.getElementById("resume-button").addEventListener("click", function(){
+    resumeGame();
+});
+
 
 // キーが押された時の処理
 function keyDownHandler(e) {
@@ -34,6 +51,27 @@ function keyUpHandler(e) {
     }
 }
 
+// ボタンが押された時の処理
+
+// ゲームを開始
+function startGame() {
+    if (!intervalId) {
+        intervalId = setInterval(draw, 10);
+    }
+}
+
+// ゲームを停止
+function stopGame() {
+    clearInterval(intervalId);
+    intervalId = null;
+}
+
+// ゲームを再開
+function resumeGame() {
+    if (!intervalId) {
+        intervalId = setInterval(draw, 10);
+    }
+}
 
 // 背面を描画する関数
 function drawBackground() {
@@ -77,6 +115,11 @@ function draw() {
 
     // パドルとの衝突判定
     if(ball.y + ball.dy > canvas.height - ball.radius - paddle.height && ball.x > paddle.x - paddle.width/2 && ball.x < paddle.x + paddle.width/2) {
+        if (ball.x < paddle.x) {  // パドルの左側に当たった場合
+            ball.dx = -Math.abs(ball.dx);
+        } else {  // パドルの右側に当たった場合
+            ball.dx = Math.abs(ball.dx);
+        }
         ball.dy = -ball.dy;
     }
 
@@ -94,11 +137,5 @@ function draw() {
     drawBackground();
     drawBall();
     drawPaddle();
-
-    // 次のフレームを描画
-    requestAnimationFrame(draw);
 }
-
-// ゲームを開始する
-draw();
 
