@@ -1,13 +1,13 @@
 // JS PONG Game for single player by ChatGPT and Me
 
 // ゲームの初期化
-var canvas = document.getElementById("canvas");  // canvas要素を取得
-var ctx = canvas.getContext("2d");  // canvasの2Dコンテキストを取得
+let canvas = document.getElementById("canvas");  // canvas要素を取得
+let ctx = canvas.getContext("2d");  // canvasの2Dコンテキストを取得
 
-var ball = { x: canvas.width/2, y: canvas.height/2, dx: 5, dy: -5, radius: 10 };  // ボールの初期位置と速度、半径
-var paddle = { x: canvas.width/2, y: canvas.height-20, width: 80, height: 10 };  // パドルの初期位置とサイズ
-var leftPressed = false;  // 左キーが押されているかどうかのフラグ
-var rightPressed = false;  // 右キーが押されているかどうかのフラグ
+let ball = { x: canvas.width/2, y: canvas.height/2, dx: 5, dy: -5, radius: 10 };  // ボールの初期位置と速度、半径
+let paddle = { x: canvas.width/2, y: canvas.height-20, width: 80, height: 10 };  // パドルの初期位置とサイズ
+let leftPressed = false;  // 左キーが押されているかどうかのフラグ
+let rightPressed = false;  // 右キーが押されているかどうかのフラグ
 
 // キーイベントのリスナーを追加
 document.addEventListener("keydown", keyDownHandler, false);
@@ -33,11 +33,14 @@ function keyUpHandler(e) {
     }
 }
 
-// ボールを描画する関数
-function drawBall() {
+// 背面を描画する関数
+function drawBackground() {
     ctx.fillStyle = '#f2f2f2';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
 
+// ボールを描画する関数
+function drawBall() {
     ctx.fillStyle = '#f1c40f';
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
@@ -85,7 +88,8 @@ function draw() {
     // 画面のクリア
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // ボールとパドルを描画
+    // ゲーム要素を描画
+    drawBackground();
     drawBall();
     drawPaddle();
 

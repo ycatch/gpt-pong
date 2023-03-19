@@ -2,7 +2,7 @@
 
 JS PONG Game for single player by ChatGPT and Me
 
-![screenshot](./gpt-pong.png)
+[![screenshot](./gpt-pong.png)](https://ycatch.github.io/gpt-pong/)
 
 
 ## 解説
