@@ -6,6 +6,7 @@ let ctx = canvas.getContext("2d");  // canvasの2Dコンテキストを取得
 
 let ball = { x: canvas.width/2, y: canvas.height/2, dx: 5, dy: -5, radius: 10 };  // ボールの初期位置と速度、半径
 let paddle = { x: canvas.width/2, y: canvas.height-20, width: 80, height: 10 };  // パドルの初期位置とサイズ
+
 let leftPressed = false;  // 左キーが押されているかどうかのフラグ
 let rightPressed = false;  // 右キーが押されているかどうかのフラグ
 
@@ -15,23 +16,24 @@ document.addEventListener("keyup", keyUpHandler, false);
 
 // キーが押された時の処理
 function keyDownHandler(e) {
-    if(e.keyCode == 37) {  // 左キー
+    if(e.key === "ArrowLeft") {  // 左キー
         leftPressed = true;
     }
-    else if(e.keyCode == 39) {  // 右キー
+    else if(e.key === "ArrowRight") {  // 右キー
         rightPressed = true;
     }
 }
 
 // キーが離された時の処理
 function keyUpHandler(e) {
-    if(e.keyCode == 37) {  // 左キー
+    if(e.key === "ArrowLeft") {  // 左キー
         leftPressed = false;
     }
-    else if(e.keyCode == 39) {  // 右キー
+    else if(e.key === "ArrowRight") {  // 右キー
         rightPressed = false;
     }
 }
+
 
 // 背面を描画する関数
 function drawBackground() {
