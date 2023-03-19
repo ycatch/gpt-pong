@@ -35,9 +35,12 @@ function keyUpHandler(e) {
 
 // ボールを描画する関数
 function drawBall() {
+    ctx.fillStyle = '#f2f2f2';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#f1c40f';
     ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);  // 円を描画
-    ctx.fillStyle = "#0095DD";
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
     ctx.fill();
     ctx.closePath();
 }
@@ -45,9 +48,8 @@ function drawBall() {
 // パドルを描画する関数
 function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddle.x - paddle.width/2, paddle.y, paddle.width, paddle.height);  // 長方形を描画
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
+    ctx.fillStyle = '#ccc';
+    ctx.fillRect(paddle.x - paddle.width/2, canvas.height - paddle.height, paddle.width, paddle.height);
     ctx.closePath();
 }
 
